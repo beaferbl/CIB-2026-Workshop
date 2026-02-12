@@ -1,4 +1,5 @@
 # En este script se inluyen los bloques de código del pdf numerados de la misma forma.
+# Setwd() Entorno de trabajo
 
 ##### 2.3. Instalación de paquetes #####
 install.packages(c("dplyr","ggplot2","heplots","RColorBrewer",
@@ -31,6 +32,7 @@ c <- "Adios"
 # Las variables se pueden sobreescribir y reasignarles otro valor
 c<-4
 
+# R base cheat sheet: https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf
 ##### 4.2. Concepto de objeto #####
 # Funciones
 sqrt(2)
@@ -238,11 +240,15 @@ table(tmb.complete$Cancer.Type,tmb.complete$Sex)
 chisq.test(table(tmb.complete$Sex[tmb.complete$Cancer.Type=="Bladder Cancer"]))
 
 ## 7.3. Creación de gráficos con el paquete ggplot2
+install.packages("RColorBrewer2")
+library(RColorBrewer)
+display.brewer.all() # All palette names #https://r-charts.com/color-palettes/
+
 display.brewer.all(colorblindFriendly = TRUE)
 # Gráfico de cajas y bigotes
 ggplot(data = tmb, aes(x = Overall.Survival.Status, y = Overall.Survival..Months., fill = factor(Overall.Survival.Status))) + 
   geom_boxplot() +
-  scale_fill_manual(values = c("0:LIVING" = "lightblue", "1:DECEASED" = "grey")) +
+  scale_manual(values = c("0:LIVING" = "lightblue", "1:DECEASED" = "grey")) +
   labs(title = "Overall Survival by Status", 
        x = "Survival Status", 
        y = "Overall Survival (Months)")
@@ -276,6 +282,16 @@ ggsave("lastplot_name.png",# This code only works for ggplot-made figures
        height = 6,   
        units = "in", # Units (in, cm, mm)
        dpi = 300)    # Resolution (300 is the standard for publications)  
+
+## EXTRA PALETAS DE COLORES
+# Alta personalización
+install.packages("RColorBrewer2")
+library(RColorBrewer)
+display.brewer.all() # All palette names #https://r-charts.com/color-palettes/
+
+# https://r-charts.com/color-palettes/
+# Hex color codes https://r-charts.com/colors/
+
 
 ## EJERCICIOS
 
@@ -392,3 +408,4 @@ ggplot(data_excel, aes(x = "", fill = `M Stage`)) +
   coord_polar("y", start = 0) +
   theme_void() + # Removes background grid/axes for a cleaner look
   labs(title = "M Stage Distribution")
+
